@@ -4,7 +4,7 @@ let newbt = document.querySelector("#n1");
 let contain_msg =document.querySelector(".msg-container")
 let msg = document.querySelector("#msg");
 let turn_o=true;
-
+let count =0;
 let game=[
     [0,1,2],
     [3,4,5],
@@ -37,10 +37,19 @@ boxes.forEach((box) => {
                 turn_o= true;
         }
         box.disabled= true; //this line used for next time click the button not applicable
+         count++;
 
-        win();
+        let iswin = win();
+        if(count === 9 && !iswin){
+            gamedraw();
+        }
     });
 });
+const gamedraw = () => {
+  msg.innerText = `Game was a Draw.`;
+  contain_msg.classList.remove("hide");
+  disable();
+};
 let disable =()=>{
     for(let box1 of boxes){
         box1.disabled=true;
